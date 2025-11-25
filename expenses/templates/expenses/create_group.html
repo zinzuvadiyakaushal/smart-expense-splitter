@@ -1,42 +1,40 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Group - Smart Expense Splitter</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">Smart Expense Splitter</a>
-            <div class="navbar-nav ms-auto">
-                <form method="post" action="{% url 'logout' %}" class="d-inline">
+{% extends 'base.html' %}
+
+{% block title %}Create Group · Smart Expense Splitter{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+        <div class="card card-glass shadow-lg border-0">
+            <div class="card-body p-4 p-md-5">
+                <p class="text-uppercase text-white-50 mb-1">New Collaboration</p>
+                <h2 class="fw-bold mb-4">Create a smart group</h2>
+                <form method="post" class="row g-4">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-link nav-link">Logout</button>
+                    <div class="col-12">
+                        <label for="{{ form.name.id_for_label }}" class="form-label text-white-50">Group Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-12">
+                        <label for="{{ form.members_text.id_for_label }}" class="form-label text-white-50">Group Members</label>
+                        {{ form.members_text }}
+                        <div class="mt-2 p-3 rounded" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3);">
+                            <small class="text-white d-block mb-1"><strong>💡 How to add members:</strong></small>
+                            <small class="text-white-50 d-block">• Write any names you want for group members</small>
+                            <small class="text-white-50 d-block">• One name per line or separated by commas</small>
+                            <small class="text-white-50 d-block">• Members will be created automatically</small>
+                        </div>
+                        {% if form.members_text.errors %}
+                            <div class="text-danger small mt-2">{{ form.members_text.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 d-flex gap-3">
+                        <button type="submit" class="btn btn-gradient px-4">Save Group</button>
+                        <a href="{% url 'home' %}" class="btn btn-outline-light">Cancel</a>
+                    </div>
                 </form>
             </div>
         </div>
-    </nav>
-
-    <div class="container mt-5">
-        <h1>Create New Group</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="{{ form.name.id_for_label }}" class="form-label">Group Name</label>
-                {{ form.name }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.members.id_for_label }}" class="form-label">Members</label>
-                {{ form.members }}
-                <small class="form-text text-muted">Hold Ctrl to select multiple members.</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Create Group</button>
-        </form>
-        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to Home</a>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}

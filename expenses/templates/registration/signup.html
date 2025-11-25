@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up · Smart Expense Splitter{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center min-vh-75">
+    <div class="col-lg-5">
+        <div class="card card-glass shadow-lg border-0 overflow-hidden position-relative login-card animated-bg">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <div class="brand-visual mb-3"></div>
+                    <h2 class="fw-bold mb-0 login-heading">Sign Up</h2>
+                    <p class="text-white-50 login-subtitle">Create your account</p>
+                </div>
+                <form method="post" class="login-form slide-in-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label text-white-50 small text-uppercase">Username</label>
+                        <div class="input-glow">
+                            {{ form.username }}
+                        </div>
+                        {% if form.username.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.username.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label text-white-50 small text-uppercase">Email</label>
+                        <div class="input-glow">
+                            {{ form.email }}
+                        </div>
+                        {% if form.email.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.email.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label text-white-50 small text-uppercase">Password</label>
+                        <div class="input-glow">
+                            {{ form.password1 }}
+                        </div>
+                        {% if form.password1.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.password1.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_password2" class="form-label text-white-50 small text-uppercase">Confirm Password</label>
+                        <div class="input-glow">
+                            {{ form.password2 }}
+                        </div>
+                        {% if form.password2.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.password2.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-gradient w-100 btn-lg mb-3">Create Account</button>
+                </form>
+                <p class="text-white-50 text-center mb-0 small">
+                    Already have an account? <a href="{% url 'login' %}" class="text-white fw-semibold">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

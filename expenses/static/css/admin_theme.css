@@ -1,0 +1,126 @@
+:root {
+    --aurora-bg: radial-gradient(circle at top, #1d4ed8, #020617 60%);
+    --aurora-card: rgba(15, 23, 42, 0.85);
+    --aurora-border: rgba(148, 163, 184, 0.25);
+    --aurora-accent: #38bdf8;
+    --aurora-accent-2: #c084fc;
+}
+
+body.login,
+#header,
+.module,
+.dashboard #content-main .module,
+.dashboard #content-related {
+    background: transparent;
+}
+
+body {
+    background: var(--aurora-bg);
+    min-height: 100vh;
+    color: #e2e8f0;
+}
+
+#header {
+    border-bottom: 1px solid var(--aurora-border);
+    box-shadow: 0 15px 35px rgba(2, 6, 23, 0.4);
+    background: rgba(2, 6, 23, 0.85);
+}
+
+#site-name {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+#site-name .logo-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: linear-gradient(120deg, var(--aurora-accent), var(--aurora-accent-2));
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+    display: inline-block;
+}
+
+.admin-tagline {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(248, 250, 252, 0.7);
+}
+
+#content,
+div.breadcrumbs {
+    background: transparent;
+}
+
+.module,
+.module table {
+    border-radius: 18px;
+    border: 1px solid var(--aurora-border);
+    background: var(--aurora-card);
+    backdrop-filter: blur(18px);
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input {
+    background: linear-gradient(90deg, var(--aurora-accent), var(--aurora-accent-2));
+    border: none;
+    color: #020617;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 8px 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+    color: #020617;
+}
+
+table thead th {
+    background: rgba(15, 23, 42, 0.7);
+    color: #f8fafc;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+table td,
+table th {
+    border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+#content-main .module h2 {
+    color: #f8fafc;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.dashboard #content-related .module h2 {
+    color: #f8fafc;
+}
+
+body.login #container {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 24px;
+    border: 1px solid var(--aurora-border);
+    box-shadow: 0 25px 60px rgba(2, 6, 23, 0.65);
+}
+
+body.login .submit-row input {
+    width: 100%;
+}
+
+body.login #header {
+    display: none;
+}
+

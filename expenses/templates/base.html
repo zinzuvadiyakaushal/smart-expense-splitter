@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Smart Expense Splitter{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg nav-glass shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="{% url 'home' %}">Smart Expense Splitter</a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    {% if user.is_authenticated %}
+                        <span class="text-white-50" id="live-time"></span>
+                        <span class="text-white-50">Hi, {{ user.first_name|default:user.username }} 👋</span>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-outline-light px-3">Logout</button>
+                        </form>
+                    {% else %}
+                        <span class="text-white-50" id="live-time"></span>
+                        <a class="btn btn-sm btn-outline-light" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-area">
+        <div class="container">
+            {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} shadow-sm" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="text-center pb-4">
+        <small>SplitSphere · Smart expense management for modern teams</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Live time update function
+        function updateLiveTime() {
+            const now = new Date();
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const timeString = `${month} ${day}, ${hours}:${minutes}`;
+            
+            const timeElement = document.getElementById('live-time');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+        
+        // Update time immediately and then every second for live updates
+        updateLiveTime();
+        setInterval(updateLiveTime, 1000); // Update every second for live time
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

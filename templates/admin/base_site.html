@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}FinTech Operations Hub{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/admin_theme.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name" class="fw-bold text-light">
+        <span class="logo-dot"></span>FinTech Operations Hub
+    </h1>
+{% endblock %}
+
+{% block nav-global %}
+    <div class="admin-tagline">Advanced Financial Management System</div>
+{% endblock %}
+
